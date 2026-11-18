@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Modal,
   FlatList,
+  Platform,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,6 +23,12 @@ import {
   setActiveUsn,
 } from '../utils/storage';
 
+const BROWSER_USER_AGENT = Platform.select({
+  android:
+    'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36',
+  ios:
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1',
+});
 export default function PortalScreen({
   profiles,
   activeProfile,
@@ -142,7 +149,11 @@ export default function PortalScreen({
       <View style={styles.webWrap}>
         <WebView
           ref={webViewRef}
-          source={{ uri: currentUrl }}
+          source={{
+            uri: currentUrl,
+            headers: { 'X-Requested-With': '' },
+          }}
+          userAgent={BROWSER_USER_AGENT}
           sharedCookiesEnabled={true}
           thirdPartyCookiesEnabled={true}
           domStorageEnabled={true}
