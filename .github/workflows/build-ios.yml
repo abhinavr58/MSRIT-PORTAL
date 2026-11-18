@@ -20,7 +20,7 @@ jobs:
       - name: Install & align Expo dependencies
         run: |
           npm install
-          npx expo install expo-asset
+          npx expo install expo-asset expo-font
           npx expo install --fix
 
       - name: Generate native iOS project
