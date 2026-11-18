@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "MSRIT Attendance",
+    "slug": "msrit-attendance",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "android": {
+      "package": "com.msrit.attendance",
+      "permissions": [
+        "INTERNET"
+      ]
+    },
+    "ios": {
+      "bundleIdentifier": "com.msrit.attendance",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": false
+        }
+      }
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-document-picker"
+    ]
+  }
+}
