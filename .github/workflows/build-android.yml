@@ -23,11 +23,15 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install & align Expo dependencies
+        run: |
+          npm install
+          npx expo install --fix
 
       - name: Generate native Android project
-        run: npx expo prebuild --platform android --non-interactive
+        env:
+          CI: 1
+        run: npx expo prebuild --platform android
 
       - name: Build installable Android APK
         working-directory: android
