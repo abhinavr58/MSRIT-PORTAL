@@ -17,11 +17,16 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install & align Expo dependencies
+        run: |
+          npm install
+          npx expo install expo-asset
+          npx expo install --fix
 
       - name: Generate native iOS project
-        run: npx expo prebuild --platform ios --non-interactive
+        env:
+          CI: 1
+        run: npx expo prebuild --platform ios
 
       - name: Install CocoaPods
         working-directory: ios
