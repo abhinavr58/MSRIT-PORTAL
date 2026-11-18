@@ -26,6 +26,7 @@ jobs:
       - name: Install & align Expo dependencies
         run: |
           npm install
+          npx expo install expo-asset
           npx expo install --fix
 
       - name: Generate native Android project
@@ -33,14 +34,14 @@ jobs:
           CI: 1
         run: npx expo prebuild --platform android
 
-      - name: Build installable Android APK
+      - name: Build standalone Android APK
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleRelease
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: MSRIT-Attendance-Android-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
